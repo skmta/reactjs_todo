@@ -20,6 +20,10 @@ class App extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const title = e.target.title.value;
+    if (!title) {
+      alert("Enter the title");
+      return;
+    }
     const desc = e.target.desc.value;
     const todos = this.state.todos.slice()
     const countTodo = this.state.countTodo
