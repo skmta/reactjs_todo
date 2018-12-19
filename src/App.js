@@ -9,18 +9,6 @@ class App extends Component {
   constructor() {
     super()
     const todos = [
-      {
-        id: 1,
-        title: "Hello, React!",
-        desc: "React始めました",
-        done: false
-      },
-      {
-        id: 2,
-        title: "Hello, Redux!",
-        desc: "Reduxも始めました",
-        done: false
-      },
     ]
     this.state = {
       todos: todos,
@@ -51,6 +39,16 @@ class App extends Component {
     e.target.desc.value = '';
   }
 
+  //Todoの完了/未完了を切り替える
+  setTodoStatus(clickTodo) {
+    const todos = this.state.todos.slice();
+    const todo = todos[clickTodo.id - 1];
+    todo.done = !todo.done;
+    todos[clickTodo.id - 1] = todo;
+
+    this.setState({ todos });
+  }
+
   render() {
     return (
       <div className="app">
@@ -58,6 +56,7 @@ class App extends Component {
         <Form handleSubmit={this.handleSubmit.bind(this)} />
         <TodoList
           todos={this.state.todos}
+          setTodoStatus={this.setTodoStatus.bind(this)}
           />
       </div>
     );
